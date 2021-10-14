@@ -39,7 +39,7 @@
 (defun decrypt-region (start end)
   (interactive "r")
   (let ((ctext-str (split-string (buffer-substring start end) "#####")))
-    (with-output-to-temp-buffer encrypt-region--buf-name
+    (with-output-to-temp-buffer (generate-new-buffer encrypt-region--buf-name)
       (print1 (encrypt-region--unpad
 	      (decode-coding-string
 	       (gnutls-symmetric-decrypt "CHACHA20-POLY1305"
@@ -52,7 +52,7 @@
 (defun encrypt-region (start end)
   "Encrypts a region and ouputs its base64 encoding in a new buffer."
   (interactive "r")
-  (with-output-to-temp-buffer encrypt-region--buf-name
+  (with-output-to-temp-buffer (generate-new-buffer encrypt-region--buf-name)
     (princ (mapconcat
 	    #'base64-encode-string
 	    (gnutls-symmetric-encrypt
