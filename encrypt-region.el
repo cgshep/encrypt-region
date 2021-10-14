@@ -15,7 +15,7 @@
   :group 'text)
 
 (defcustom encrypt-region--key "key"
-  "Define key for encrypting regions."
+  "Define a 16-byte/32-hexchar key for encrypting regions."
   :type 'string
   :group 'encrypt-region)
 
