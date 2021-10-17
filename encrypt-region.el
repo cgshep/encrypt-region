@@ -26,19 +26,20 @@
 
 (defun encrypt-region--pad (input length)
   "Pad string to a given length"
-    ;;; Thanks to auth-source.el https://github.com/emacs-mirror/emacs/blob/master/lisp/auth-source.el
+  ;; Thanks to auth-source.el https://github.com/emacs-mirror/emacs/blob/master/lisp/auth-source.el
   (let ((p (- length (mod (length input) length))))
     (concat input (make-string p p))))
 
 (defun encrypt-region--unpad (string)
   "Remove padding from string."
-  ;;; Thanks to auth-source.el https://github.com/emacs-mirror/emacs/blob/master/lisp/auth-source.el
+  ;; Thanks to auth-source.el https://github.com/emacs-mirror/emacs/blob/master/lisp/auth-source.el
   (substring string 0 (- (length string)
 			 (aref string (1- (length string))))))
 
 (defun decrypt-region (start end)
+  "Decrypt a base64-encoded encrypted region and output it to a new temp buffer."
   (interactive "r")
-  (let ((ctext-str (split-string (buffer-substring start end) "#####")))
+  (let ((ctext-str (split-string (buffer-substring start end) "###")))
     (with-output-to-temp-buffer (generate-new-buffer encrypt-region--buf-name)
       (print1 (encrypt-region--unpad
 	      (decode-coding-string
@@ -55,14 +56,13 @@
   (with-output-to-temp-buffer (generate-new-buffer encrypt-region--buf-name)
     (princ (mapconcat
 	    #'base64-encode-string
-	    (gnutls-symmetric-encrypt
-	     "CHACHA20-POLY1305"
-	     (copy-sequence encrypt-region--key)
-	     (list 'iv-auto 12)
-	     (encrypt-region--pad
-	      (encode-coding-string (buffer-substring start end) 'utf-8)
-	      64)
-	     "") "###"))
+	    (gnutls-symmetric-encrypt "CHACHA20-POLY1305"
+				      (copy-sequence encrypt-region--key)
+				      (list 'iv-auto 12)
+				      (encrypt-region--pad
+				       (encode-coding-string (buffer-substring start end) 'utf-8)
+				       64)
+				      "") "###"))
     (switch-to-buffer encrypt-region--buf-name)))
 
 (provide 'encrypt-region)
