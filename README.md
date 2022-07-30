@@ -3,14 +3,14 @@ An Emacs package for encrypting and decrypting arbitrary regions.
 
 ## Getting started
 
-* Get encrypt-region
+* Get encrypt-region.
 * Add the following to your .emacs config:
 
 ```elisp
 (require 'encrypt-region)
 ```
 
-* Set your secret key
+* Set your secret key:
 
 ```elisp
 (setq encrypt-region--key "<your key here>")
