@@ -67,10 +67,10 @@
 	                                 ; Decode the IV
 					 (base64-decode-string (cadr ctext-str))
 					 ; Decode the ciphertext
-					 (base64-decode-string (car ctext-str))))
+					 (base64-decode-string (car ctext-str)))
 	       'utf-8))
       ; Output to the decrypt temporary buffer
-      (switch-to-buffer encrypt-region--decrypt-buf-name))))
+      (switch-to-buffer encrypt-region--decrypt-buf-name)))))
 
 (provide 'encrypt-region)
 ;; encrypt-region.el ends here
