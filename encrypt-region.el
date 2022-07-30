@@ -1,18 +1,18 @@
-;; encrypt-region.el -- Encrypts and decrypts regions
-;;
-;; Copyright (c) 2022, Carlton Shepherd
-;; Author: Carlton Shepherd <carlton@linux.com> (https://cs.gl)
-;; Version: 0.1
-;; Created: 14 October 2021
-;; Modified: 30 July 2022
-;; Keywords: encryption, cryptography
-;; License: GPLv3
-;; URL: https://github.com/cgshep/encrypt-region
-;;
-;; Notes: Authenticated encryption is provided by GnuTLS' ChaCha20-Poly1305
-;;
-;; This file is not part of GNU Emacs.
-;;
+;;; encrypt-region.el -- Encrypts and decrypts regions
+;;;
+;;; Copyright (c) 2022, Carlton Shepherd
+;;; Author: Carlton Shepherd <carlton@linux.com> (https://cs.gl)
+;;; Version: 0.1
+;;; Created: 14 October 2021
+;;; Modified: 30 July 2022
+;;; Keywords: encryption, cryptography
+;;; License: GPLv3
+;;;
+;;; This file is not part of GNU Emacs.
+;;;
+;;; Commentary:  Encrypts and decrypts regions. (Authenticated encryption is provided by GnuTLS' ChaCha20-Poly1305).
+;;; Code: https://github.com/cgshep/encrypt-region
+
 (defgroup encrypt-region nil
   "Encrypt region group."
   :group 'text)
@@ -26,19 +26,23 @@
 (defvar encrypt-region--decrypt-buf-name "*Decrypt Region*")
 
 (defun encrypt-region--pad (input length)
-  "Pad string to a given length using PKCS#7."
+  "Pad string to a given LENGTH using PKCS#7.
+Argument INPUT string to pad.
+Argument LENGTH pad length."
   ;; Thanks to auth-source.el
   ;; https://github.com/emacs-mirror/emacs/blob/master/lisp/auth-source.el
   (let ((p (- length (mod (length input) length))))
     (concat input (make-string p p))))
 
 (defun encrypt-region--unpad (string)
-  "Remove padding from string."
+  "Remove padding from STRING."
   (substring string 0 (- (length string)
 			 (aref string (1- (length string))))))
      
 (defun encrypt-region (start end)
-  "Encrypts a region and outputs its base64 encoding."
+  "Encrypts a region and outputs its base64 encoding.
+Argument START region start.
+Argument END region end."
   (interactive "r")
   (with-output-to-temp-buffer
     (get-buffer-create encrypt-region--encrypt-buf-name)
@@ -54,9 +58,11 @@
     (switch-to-buffer encrypt-region--encrypt-buf-name)))
 
 (defun decrypt-region (start end)
-  "Decrypt a base64-encoded encrypted region."
+  "Decrypt a base64-encoded encrypted region.
+Argument START region start.
+Argument END region end."
   (interactive "r")
-  (with-output-to-temp-buffer 
+  (with-output-to-temp-buffer
     (get-buffer-create encrypt-region--decrypt-buf-name)
     (princ (encrypt-region--unpad
 	    (decode-coding-string
@@ -76,4 +82,4 @@
     (switch-to-buffer encrypt-region--decrypt-buf-name)))
 
 (provide 'encrypt-region)
-;; encrypt-region.el ends here
+;;; encrypt-region.el ends here
