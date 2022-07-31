@@ -13,7 +13,7 @@
 
 ;;; Commentary:
 
-;;; Set a 32-char private key using (setq encrypt-region--key "<your key>")
+;;; Set a 32-char private key using (setq encrypt-region-key "<your key>")
 ;;; Use M-x encrypt-region--encrypt to encrypt a region
 ;;; Use M-x encrypt-region--decrypt to decrypt it
 ;;; URL: https://github.com/cgshep/encrypt-region
