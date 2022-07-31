@@ -18,8 +18,8 @@ An Emacs package for encrypting and decrypting arbitrary regions.
 ;; Example: (setq encrypt-region--key "616461746120646e6d20726f20656164") 
 ```
 
-* Encrypt a region using ```M-x encrypt-region```
-* Decrypt an encrypted region using ```M-x decrypt-region```
+* Encrypt a region using ```M-x encrypt-region--encrypt```
+* Decrypt an encrypted region using ```M-x encrypt-region--decrypt```
 
 ## Notes
 
