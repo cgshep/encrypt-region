@@ -13,9 +13,9 @@ An Emacs package for encrypting and decrypting arbitrary regions.
 * Set your 32-hexchar secret key:
 
 ```elisp
-(setq encrypt-region--key "<your key here>")
+(setq encrypt-region-key "<your key here>")
 
-;; Example: (setq encrypt-region--key "616461746120646e6d20726f20656164") 
+;; Example: (setq encrypt-region-key "616461746120646e6d20726f20656164") 
 ```
 
 * Encrypt a region using ```M-x encrypt-region--encrypt```
