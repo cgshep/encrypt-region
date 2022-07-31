@@ -34,7 +34,7 @@
   "Encrypt region group."
   :group 'text)
 
-(defcustom encrypt-region--key "key"
+(defcustom encrypt-region-key "key"
   "Define a 16-byte/32-hexchar key for encrypting regions."
   :type 'string
   :group 'encrypt-region)
@@ -66,7 +66,7 @@ Argument END region end."
     (princ (mapconcat
 	    #'base64-encode-string
 	    (gnutls-symmetric-encrypt "CHACHA20-POLY1305"
-				      (copy-sequence encrypt-region--key)
+				      (copy-sequence encrypt-region-key)
 				      (list 'iv-auto 12)
 				      (encrypt-region--pad
 				       (encode-coding-string (buffer-substring start end) 'utf-8)
@@ -87,7 +87,7 @@ Argument END region end."
 	      (let ((ctext-str (split-string
 				(buffer-substring start end) "###")))
 		(gnutls-symmetric-decrypt "CHACHA20-POLY1305"
-					  (copy-sequence encrypt-region--key)
+					  (copy-sequence encrypt-region-key)
 					  ;; Decode the IV
 					  (base64-decode-string (cadr ctext-str))
 					  ;; Decode the ciphertext
