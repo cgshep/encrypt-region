@@ -14,8 +14,8 @@
 ;;; Commentary:
 
 ;;; Set a 32-char private key using (setq encrypt-region-key "<your key>")
-;;; Use M-x encrypt-region--encrypt to encrypt a region
-;;; Use M-x encrypt-region--decrypt to decrypt it
+;;; Use M-x encrypt-region-encrypt to encrypt a region
+;;; Use M-x encrypt-region-decrypt to decrypt it
 ;;; URL: https://github.com/cgshep/encrypt-region
 ;;;
 ;;; This program is free software; you can redistribute it and/or modify
@@ -56,7 +56,7 @@ Argument LENGTH pad length."
   (substring string 0 (- (length string)
 			 (aref string (1- (length string))))))
      
-(defun encrypt-region--encrypt (start end)
+(defun encrypt-region-encrypt (start end)
   "Encrypts a region and outputs its base64 encoding.
 Argument START region start.
 Argument END region end."
@@ -74,7 +74,7 @@ Argument END region end."
 				      "") "###"))
     (switch-to-buffer encrypt-region--encrypt-buf-name)))
 
-(defun encrypt-region--decrypt (start end)
+(defun encrypt-region-decrypt (start end)
   "Decrypt a base64-encoded encrypted region.
 Argument START region start.
 Argument END region end."
