@@ -1,18 +1,35 @@
-;;; encrypt-region.el -- Encrypts and decrypts regions
-;;;
-;;; Copyright (c) 2022, Carlton Shepherd
-;;; Author: Carlton Shepherd <carlton@linux.com> (https://cs.gl)
-;;; Version: 0.1
-;;; Created: 14 October 2021
-;;; Modified: 30 July 2022
-;;; Keywords: encryption, cryptography
-;;; License: GPLv3
-;;;
-;;; This file is not part of GNU Emacs.
-;;;
-;;; Commentary:  Encrypts and decrypts regions. (Authenticated encryption is provided by GnuTLS' ChaCha20-Poly1305).
-;;; Code: https://github.com/cgshep/encrypt-region
+;;; encrypt-region.el --- Encrypts and decrypts regions
 
+;;; Copyright (c) 2022, Carlton Shepherd
+
+;;; Author: Carlton Shepherd <carlton@linux.com>
+
+;;; Version: 1.0
+;;; Keywords: tools, convenience
+;;; License: GPLv3
+;;; Package-Requires: ((emacs "26.1"))
+
+;;; This file is not part of GNU Emacs.
+
+;;; Commentary:
+
+;;; Set a 32-char private key using (setq encrypt-region--key "<your key>"
+;;; Use M-x encrypt-region--encrypt to encrypt a region
+;;; Use M-x encrypt-region--decrypt to decrypt it
+;;; URL: https://github.com/cgshep/encrypt-region
+;;;
+;;; This program is free software; you can redistribute it and/or modify
+;;; it under the terms of the GNU General Public License as published by
+;;; the Free Software Foundation, either version 3 of the License, or
+;;; (at your option) any later version.
+;;; This program is distributed in the hope that it will be useful,
+;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;;; GNU General Public License for more details.
+;;; You should have received a copy of the GNU General Public License
+;;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
+;;;
+;;; Code:
 (defgroup encrypt-region nil
   "Encrypt region group."
   :group 'text)
@@ -39,7 +56,7 @@ Argument LENGTH pad length."
   (substring string 0 (- (length string)
 			 (aref string (1- (length string))))))
      
-(defun encrypt-region (start end)
+(defun encrypt-region--encrypt (start end)
   "Encrypts a region and outputs its base64 encoding.
 Argument START region start.
 Argument END region end."
@@ -57,7 +74,7 @@ Argument END region end."
 				      "") "###"))
     (switch-to-buffer encrypt-region--encrypt-buf-name)))
 
-(defun decrypt-region (start end)
+(defun encrypt-region--decrypt (start end)
   "Decrypt a base64-encoded encrypted region.
 Argument START region start.
 Argument END region end."
