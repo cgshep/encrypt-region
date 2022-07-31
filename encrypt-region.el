@@ -88,12 +88,12 @@ Argument END region end."
 				(buffer-substring start end) "###")))
 		(gnutls-symmetric-decrypt "CHACHA20-POLY1305"
 					  (copy-sequence encrypt-region--key)
-					  ; Decode the IV
+					  ;; Decode the IV
 					  (base64-decode-string (cadr ctext-str))
-					  ; Decode the ciphertext
+					  ;; Decode the ciphertext
 					  (base64-decode-string (car ctext-str)))))
 	     'utf-8)))
-    ; Output to the decrypt temporary buffer
+    ;; Output to the decrypt temporary buffer
     (switch-to-buffer encrypt-region--decrypt-buf-name)))
 
 (provide 'encrypt-region)
