@@ -10,7 +10,7 @@ An Emacs package for encrypting and decrypting arbitrary regions.
 (require 'encrypt-region)
 ```
 
-* Set your secret key:
+* Set your 32-hexchar secret key:
 
 ```elisp
 (setq encrypt-region--key "<your key here>")
