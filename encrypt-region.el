@@ -57,7 +57,8 @@ Argument LENGTH pad length."
   "Remove padding from STRING."
   (substring string 0 (- (length string)
 			 (aref string (1- (length string))))))
-     
+
+;;;###autoload
 (defun encrypt-region-encrypt (start end)
   "Encrypts a region and outputs its base64 encoding.
 Argument START region start.
@@ -76,6 +77,7 @@ Argument END region end."
 				      "") "###"))
     (switch-to-buffer encrypt-region--encrypt-buf-name)))
 
+;;;###autoload
 (defun encrypt-region-decrypt (start end)
   "Decrypt a base64-encoded encrypted region.
 Argument START region start.
