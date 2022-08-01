@@ -2,6 +2,7 @@
 
 <p>
     <a href="https://melpa.org/#/encrypt-region"><img alt="MELPA" src="https://melpa.org/packages/encrypt-region-badge.svg"/></a>
+    <a href="https://stable.melpa.org/#/encrypt-region"><img alt="MELPA Stable" src="https://stable.melpa.org/packages/encrypt-region-badge.svg"/></a>
 </p>
 
 An Emacs package for encrypting and decrypting arbitrary regions.
