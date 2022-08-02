@@ -42,8 +42,8 @@
   :type 'string
   :group 'encrypt-region)
 
-(defvar encrypt-region--encrypt-buf-name "*Encrypt Region*")
-(defvar encrypt-region--decrypt-buf-name "*Decrypt Region*")
+(defvar encrypt-region--encrypt-buf-name "*Encrypted Region*")
+(defvar encrypt-region--decrypt-buf-name "*Decrypted Region*")
 
 (defun encrypt-region--pad (input length)
   "Pad string to a given LENGTH using PKCS#7.
